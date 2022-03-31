@@ -17,3 +17,17 @@ export function mount(parent, child) {
     parent.appendChild(child);
   }
 }
+
+/**
+ * 给元素装载属性
+ * @param element
+ * @param attributes
+ */
+export function applyAttributes(element, attributes) {
+  for (const [key, value] of Object.entries(attributes)) {
+    // 这里需要把类似 strokeWidth 的属性转换成 stroke-width 的形式
+    // 思路就是将大写字母替成 - + 对应的小写字母的形式
+    const kebabCaseKey = key.replace(/[A-Z]/g, (d) => `-${d.toLocaleLowerCase()}`);
+    element.setAttribute(kebabCaseKey, value);
+  }
+}
