@@ -19,7 +19,7 @@ export function mount(parent, child) {
 }
 
 /**
- * 给元素装载属性
+ * 给图形装载属性
  * @param element
  * @param attributes
  */
@@ -30,4 +30,16 @@ export function applyAttributes(element, attributes) {
     const kebabCaseKey = key.replace(/[A-Z]/g, (d) => `-${d.toLocaleLowerCase()}`);
     element.setAttribute(kebabCaseKey, value);
   }
+}
+
+/**
+ * 给图形指定变化
+ * @param element
+ * @param transform
+ */
+export function applyTransform(element, transform) {
+  const oldTransform = element.getAttribute('transform') || '';
+  // 将新变换指定到后面的变换后，这里需要字符串拼接
+  const prefix = oldTransform ? `${oldTransform} ` : '';
+  element.setAttribute('transform', `${prefix}${transform}`);
 }
