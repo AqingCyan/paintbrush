@@ -112,3 +112,34 @@ export function ceil(n, base) {
 export function floor(n, base) {
   return base * Math.floor(n / base);
 }
+
+/**
+ * 通过对象序列化结果简单判断两个对象是否相等
+ * @param a
+ * @param b
+ * @returns {boolean}
+ */
+export function equal(a, b) {
+  return JSON.stringify(a) === JSON.stringify(b);
+}
+
+/**
+ * 计算 band scale 的宽度、步长、band scale 值域范围
+ * @param domain
+ * @param range
+ * @param padding
+ * @returns {{bandWidth: number, step: number, bandRange: unknown[]}}
+ */
+export function band({ domain, range, padding }) {
+  const [r0, r1] = range;
+  const n = domain.length;
+  const step = (r1 - r0) / (n + padding);
+  const bandWidth = step * (1 - padding);
+  const interval = step - bandWidth;
+  const x = (_, i) => r0 + interval + step * i;
+  return {
+    step,
+    bandWidth,
+    bandRange: new Array(n).fill(0).map(x),
+  };
+}
