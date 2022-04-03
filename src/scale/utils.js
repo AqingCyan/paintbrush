@@ -143,3 +143,7 @@ export function band({ domain, range, padding }) {
     bandRange: new Array(n).fill(0).map(x),
   };
 }
+
+export function log(n, base) {
+  return Math.log(n) / Math.log(base);
+}

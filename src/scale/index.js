@@ -3,4 +3,8 @@ export { createTime } from './time';
 export { createOrdinal } from './ordinal';
 export { createBand } from './band';
 export { createPoint } from './point';
+export { createThreshold } from './threshold';
+export { createQuantile } from './quantile';
+export { createQuantize } from './quantize';
+export { createLog } from './log';
 export { interpolateNumber, interpolateColor } from './interpolate';
