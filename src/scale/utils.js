@@ -144,6 +144,39 @@ export function band({ domain, range, padding }) {
   };
 }
 
+/**
+ * 恒等映射
+ * @param x
+ * @returns {*}
+ */
+export function identity(x) {
+  return x;
+}
+
+/**
+ * 等分方法，用于 threshold scale
+ * @param array 原数组
+ * @param x 份数
+ * @param lo 最低节点
+ * @param hi 最高节点
+ * @param accessor
+ * @returns {number}
+ */
+export function bisect(array, x, lo = 0, hi = array.length, accessor = identity) {
+  let i = lo;
+  let j = hi;
+  while (i < j) {
+    // eslint-disable-next-line no-bitwise
+    const mid = (i + j) >>> 1;
+    if (accessor(array[mid]) < x) {
+      i = mid + 1;
+    } else {
+      j = mid;
+    }
+  }
+  return i;
+}
+
 export function log(n, base) {
   return Math.log(n) / Math.log(base);
 }
