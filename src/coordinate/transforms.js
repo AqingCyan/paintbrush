@@ -55,3 +55,17 @@ export function reflectY() {
 export function transpose() {
   return transform('transpose', ([px, py]) => [py, px]);
 }
+
+/**
+ * 笛卡尔坐标系 -> 极坐标变换
+ * @returns {*}
+ */
+export function polar() {
+  // 这里我们把点的第一个维度作为 theta
+  // 第二个维度作为 radius
+  return transform('polar', ([theta, radius]) => {
+    const x = radius * Math.cos(theta);
+    const y = radius * Math.sin(theta);
+    return [x, y];
+  });
+}
